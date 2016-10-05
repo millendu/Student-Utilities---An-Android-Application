@@ -1,0 +1,153 @@
+package com.example.myfirstapp;
+
+
+
+import com.stackmob.android.sdk.common.StackMobAndroid;
+import com.stackmob.sdk.callback.StackMobModelCallback;
+import com.stackmob.sdk.exception.StackMobException;
+
+
+
+import android.os.Bundle;
+
+import android.view.Gravity;
+import android.view.View;
+import android.app.Activity;
+import android.view.Menu;
+import android.widget.EditText;
+import android.widget.Toast;
+import android.content.*;
+
+
+
+
+public class MainActivity extends Activity {
+
+	public final static String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        StackMobAndroid.init(getApplicationContext(), 0, "a1748a0f-8364-4205-bb16-271436d8a481");
+
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+    
+    
+    /** Called when the user clicks the Send button */
+    public void register(View view){
+    	Intent reg_int = new Intent(this, RegisterActivity.class);
+    	startActivity(reg_int);
+    	}
+    
+    public void login(View view){
+    	try{
+    	    		
+    	EditText username = (EditText) findViewById(R.id.username);
+    	String u = username.getText().toString();
+    	
+    	 
+    	EditText password = (EditText) findViewById(R.id.pass_word);
+    	String p = password.getText().toString();
+    	
+    	UserDetails user=new UserDetails(u,p);
+    	user.login(new StackMobModelCallback() {
+    		  
+    	    @Override
+    	    public void success() {
+    	    	Intent log_int = new Intent(getBaseContext(), ChooseActivity.class);
+    	    	startActivity(log_int);
+    	    }
+    	 	  
+    	   
+    	   	@Override
+			public void failure(StackMobException arg0) {
+				// TODO Auto-generated method stub
+    	   		
+    	   		final Context context = getApplicationContext();
+    	   		final CharSequence text = "Invalid Username and Password";
+    	   		final int duration = Toast.LENGTH_LONG;
+    	   		runOnUiThread(new Runnable() {
+	        		
+	        		public void run() { 
+	        			Toast toast = Toast.makeText(context, text, duration);
+	        	   		toast.setGravity(Gravity.BOTTOM|Gravity.LEFT, 0, 0);
+	        	   		toast.show();
+	    	       }
+    	   		});
+    	   		
+			}
+    	
+    	});
+    	}catch(Exception e)
+    	{
+    		System.out.println(e.getMessage().toString());
+    	}
+    }
+    	
+    	
+    
+    
+   
+    	
+			
+		
+    
+}
+    /**public void sendMessage(View view) {
+    	Intent intent = new Intent(this, DisplayMessageActivity.class);
+    	EditText editText = (EditText) findViewById(R.id.edit_message);
+    	String message = editText.getText().toString();
+    	intent.putExtra(EXTRA_MESSAGE, message);
+    	startActivity(intent);*/
+    	
+    	
+    
+
+    
+( XML Code )
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <EditText
+        android:id="@+id/username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="50dp"
+        android:hint="@string/username" />
+
+    <EditText
+        android:id="@+id/pass_word"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="20dp"
+        android:hint="@string/pass_word" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="30dp"
+        android:onClick="login"
+        android:text="@string/button_login" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="20dp"
+        android:onClick="register"
+        android:text="@string/button_register" />
+    

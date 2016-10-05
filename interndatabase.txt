@@ -1,0 +1,28 @@
+package com.example.myfirstapp;
+
+import com.stackmob.sdk.model.StackMobModel;
+
+public class InternPost extends StackMobModel {
+
+	public String org;
+	public String scope;
+	
+	public InternPost(String org,String scope){
+		super(InternPost.class);
+		this.org=org;
+		this.scope=scope;
+	}
+	public String getOrg() {
+		return org;
+	}
+	public void setOrg(String org) {
+		this.org = org;
+	}
+	public String getScope() {
+		return scope;
+	}
+	public void setScope(String scope) {
+		this.scope = scope;
+	}
+
+}

@@ -1,0 +1,57 @@
+package com.example.myfirstapp;
+
+import android.os.Bundle;
+import android.content.*;
+import android.view.*;
+import android.app.Activity;
+import android.view.Menu;
+
+public class ChooseActivity extends Activity {
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_choose);
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.choose, menu);
+		return true;
+	}
+	public void choose_intern(View view) {
+		Intent cho_intern = new Intent(this, InternchooseActivity.class);
+		startActivity(cho_intern);
+	}
+	public void choose_event(View view) {
+		Intent cho_event = new Intent(this, ColchooseActivity.class);
+		startActivity(cho_event);
+	}
+
+}
+
+ ( XML Code )
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="100dp"
+        android:layout_marginTop="100dp"
+        android:onClick="choose_intern"
+        android:text="@string/button_intern" />
+        
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="85dp"
+        android:layout_marginTop="70dp"
+        android:onClick="choose_event"
+        android:text="@string/button_event" />
+
+</LinearLayout>

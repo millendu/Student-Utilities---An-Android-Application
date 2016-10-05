@@ -1,0 +1,72 @@
+package com.example.myfirstapp;
+
+import android.os.Bundle;
+import android.app.Activity;
+import android.content.Intent;
+import android.view.Menu;
+import android.view.View;
+import android.widget.EditText;
+
+public class InternpostActivity extends Activity {
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_internpost);
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.internpost, menu);
+		return true;
+	}
+	
+	public void intern_post(View view){
+		
+		EditText org = (EditText) findViewById(R.id.intpost_org);
+    	String o = org.getText().toString();
+    	
+    	EditText scope = (EditText) findViewById(R.id.intpost_scope);
+    	String s = scope.getText().toString();
+    	
+    	InternPost internpost = new InternPost(o,s);
+    	internpost.save();
+    	
+    	Intent intern_post = new Intent(this, InternchooseActivity.class);
+    	startActivity(intern_post);
+	}
+
+}
+( XML Code )
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+        <EditText
+            android:id="@+id/intpost_org"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="40dp"
+            android:hint="@string/intpost_org" />
+        
+        <EditText
+            android:id="@+id/intpost_scope"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="25dp"
+            android:layout_marginTop="25dp"
+            android:hint="@string/intpost_scope" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="30dp"
+            android:onClick="intern_post"
+            android:text="@string/button_intpost" />
+
+</LinearLayout>

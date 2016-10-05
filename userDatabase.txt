@@ -1,0 +1,61 @@
+package com.example.myfirstapp;
+
+import com.stackmob.sdk.model.StackMobModel;
+
+public class UserDetails extends StackMobModel{
+
+	public String name;
+	public String username;
+	public String password;
+	public String college;
+	public String city;
+	public String interest;
+	
+public UserDetails(String name,String username,String password,String college,String city,String interest){
+		super(UserDetails.class);
+		this.name=name;
+		this.username=username;
+		this.password=password;
+		this.college=college;
+		this.city=city;
+		this.interest=interest;
+}
+
+public String getName() {
+		return name;
+}
+public void setName(String name) {
+		this.name = name;
+}
+public String getUsername() {
+		return username;
+}
+public void setUsername(String username) {
+		this.username = username;
+}
+public String getPassword() {
+		return password;
+}
+public void setPassword(String password) {
+		this.password = password;
+}
+public String getCollege() {
+		return college;
+}
+public void setCollege(String college) {
+		this.college = college;
+}
+public String getCity() {
+		return city;
+}
+public void setCity(String city) {
+		this.city = city;
+}
+public String getInterest() {
+		return interest;
+}
+public void setInterest(String interest) {
+		this.interest = interest;
+}
+}
+

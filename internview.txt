@@ -1,0 +1,67 @@
+package com.example.myfirstapp;
+
+import java.util.Arrays;
+import java.util.List;
+
+import com.stackmob.sdk.api.StackMobOptions;
+import com.stackmob.sdk.api.StackMobQuery;
+import com.stackmob.sdk.callback.StackMobQueryCallback;
+import com.stackmob.sdk.exception.StackMobException;
+
+import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.view.Gravity;
+import android.widget.Toast;
+import android.app.Activity;
+import android.content.Context;
+
+
+public class DisplayMessage2 extends Activity {
+
+	StringBuilder st = new StringBuilder();
+	
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+	    super.onCreate(savedInstanceState);
+	    EventPost.query(InternPost.class, new StackMobQuery().isInRange(0, 9), 
+	            StackMobOptions.selectedFields(Arrays.asList("org", "scope")), 
+	            new StackMobQueryCallback<InternPost>() {
+	        public void success(final List<InternPost> result) {
+	           // You've now got a list of the tasks
+	        	final Context context = getApplicationContext();
+    	   		final int duration = Toast.LENGTH_LONG;
+	        	for(InternPost e : result){
+	        		st.append(e.toString());
+	        	}
+	        	final CharSequence text = st;
+	        	
+    	   		runOnUiThread(new Runnable() {
+	        		public void run() {
+	        		
+	        			final Toast t = Toast.makeText(context, text, duration);
+	        			t.setGravity(Gravity.TOP|Gravity.LEFT, 0, 0);
+	        	   		t.show();
+	        	   		new CountDownTimer(20000, 1000)
+	        	   		{
+
+	        	   		    public void onTick(long millisUntilFinished) {t.show();}
+	        	   		    public void onFinish() {t.show();}
+
+	        	   		}.start();
+	        		  	
+	        	   			
+	    	      }
+	        	});
+	        }
+	     
+	        public void failure(StackMobException e) {
+	        }
+	    });
+	  
+	}
+
+    
+	
+	
+}
+
